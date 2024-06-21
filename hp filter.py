@@ -42,8 +42,8 @@ corr = np.corrcoef(cyclejapan.loc[common_index], cyclefrance.loc[common_index])[
     
 # Display results
 print(f"Standard deviation of cyclical component for Japan: {japan_std:.4f}")
-print(f"Standard deviation of cyclical component for USA: {france_std:.4f}")
-print(f"Correlation coefficient of cyclical components between Japan and USA: {corr:.4f}")
+print(f"Standard deviation of cyclical component for France: {france_std:.4f}")
+print(f"Correlation coefficient of cyclical components between Japan and Fance: {corr:.4f}")
 
 # Add a legend and show the plot
 plt.figure(figsize=(12, 6))
@@ -57,4 +57,3 @@ plt.grid(True)
 plt.savefig('cyclical_components.png')
 plt.show()
 plt.close()
-
