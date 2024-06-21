@@ -20,8 +20,8 @@ gdpjapan_pct_change = gdpjapan.pct_change(4)
 gdpfrance_pct_change = gdpfrance.pct_change(4)
 
 # apply a Hodrick-Prescott filter to the data to extract the cyclical component
-cycle, trendjapan = sm.tsa.filters.hpfilter(log_gdpjapan, lamb=1600)
-cycle, trendfrance = sm.tsa.filters.hpfilter(log_gdpfrance, lamb=1600)
+cyclejapan, trendjapan = sm.tsa.filters.hpfilter(log_gdpjapan, lamb=1600)
+cyclefrance, trendfrance = sm.tsa.filters.hpfilter(log_gdpfrance, lamb=1600)
 
 # Plot the original time series data
 plt.plot(log_gdpjapan, label="Original GDP (in log)")
@@ -31,10 +31,30 @@ plt.plot(log_gdpfrance, label="Original GDP (in log)")
 plt.plot(trendjapan, label="Trend Japan")
 plt.plot(trendfrance, label="Trend France")
 
-# Add a legend and show the plot
-plt.legend()
-plt.show()
 
-trendjapan_std = np. std(trendjapan)
-trendfrance_std = np. std(trendfrance)
+# Calculate standard deviation of cyclical components
+japan_std = np. std(cyclejapan)
+france_std = np. std(cyclefrance)
+
+# Calculate correlation coefficient of cyclical components
+common_index = cyclejapan.index.intersection(cyclefrance.index)
+corr = np.corrcoef(cyclejapan.loc[common_index], cyclefrance.loc[common_index])[0, 1]
+    
+# Display results
+print(f"Standard deviation of cyclical component for Japan: {japan_std:.4f}")
+print(f"Standard deviation of cyclical component for USA: {france_std:.4f}")
+print(f"Correlation coefficient of cyclical components between Japan and USA: {corr:.4f}")
+
+# Add a legend and show the plot
+plt.figure(figsize=(12, 6))
+plt.plot(cyclejapan, label='Japan')
+plt.plot(cyclefrance, label='FRANCE')
+plt.title('Time Series of Cyclical Components')
+plt.xlabel('Year')
+plt.ylabel('Cyclical Component')
+plt.legend()
+plt.grid(True)
+plt.savefig('cyclical_components.png')
+plt.show()
+plt.close()
 
