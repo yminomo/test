@@ -34,3 +34,7 @@ plt.plot(trendfrance, label="Trend France")
 # Add a legend and show the plot
 plt.legend()
 plt.show()
+
+trendjapan_std = np. std(trendjapan)
+trendfrance_std = np. std(trendfrance)
+

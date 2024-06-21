@@ -8,7 +8,7 @@ pwt1001 = pd.read_stata(url)
 # Filter and select relevant columns and countries
 countries = ['Australia', 'Austria', 'Belgium', 'Canada', 'Denmark', 'Finland', 'France', 'Germany', 'Greece', 'Iceland', 'Ireland', 'Italy', 'Japan', 'Netherlands', 'New Zealand', 'Norway', 'Portugal', 'Spain', 'Sweden', 'Switzerland', 'United Kingdom', 'United States']
 data = pwt1001.loc[pwt1001['country'].isin(countries)][['country', 'countrycode', 'year', 'rgdpna', 'rkna', 'emp', 'avh', 'labsh', 'rtfpna']]
-data = data.loc[(data['year'] >= 1970) & (data['year'] <= 2015)].dropna()
+data = data.loc[(data['year'] >= 1990) & (data['year'] <= 2019)].dropna()
 
 # Calculate additional variables
 data['alpha'] = 1 - data['labsh']
